@@ -17,7 +17,7 @@ namespace DemoRestRentACar.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
     private static List<WeatherForecast> weatherForecasts;
-    static WeatherForecastController()
+    static WeatherForecastController( /*WeatherForecastContext context*/)
     {
       var rng = new Random();
       weatherForecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast

@@ -9,11 +9,11 @@ namespace DemoWeatherForeCast
     {
     }
     public DbSet<WeatherForecast> WeatherForecasts { get; set; }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-      base.OnConfiguring(optionsBuilder);
-      optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLOCALDB;Initial Catalog=WeatherDb;Integrated Security=True");
-    }
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //  base.OnConfiguring(optionsBuilder);
+    //  optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLOCALDB;Initial Catalog=WeatherDb;Integrated Security=True");
+    //}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.Entity<WeatherForecast>()
