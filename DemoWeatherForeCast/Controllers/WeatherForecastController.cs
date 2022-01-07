@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DemoWeatherForeCast;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,7 +18,7 @@ namespace DemoRestRentACar.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
     private static List<WeatherForecast> weatherForecasts;
-    static WeatherForecastController( /*WeatherForecastContext context*/)
+    static WeatherForecastController()
     {
       var rng = new Random();
       weatherForecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -33,7 +34,8 @@ namespace DemoRestRentACar.Controllers
 
     private readonly IConfiguration _configuration;
     private readonly ILogger<WeatherForecastController> _logger;
-    public WeatherForecastController(ILogger<WeatherForecastController> logger,
+    public WeatherForecastController(WeatherForecastContext context,
+      ILogger<WeatherForecastController> logger,
       IConfiguration configuration)
     {
       _configuration = configuration;

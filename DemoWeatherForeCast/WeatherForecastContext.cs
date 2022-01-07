@@ -5,7 +5,8 @@ namespace DemoWeatherForeCast
 {
   public class WeatherForecastContext : DbContext
   {
-    public WeatherForecastContext()
+    public WeatherForecastContext(DbContextOptions options)
+      :base(options)
     {
     }
     public DbSet<WeatherForecast> WeatherForecasts { get; set; }
