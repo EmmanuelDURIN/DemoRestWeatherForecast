@@ -58,26 +58,39 @@ namespace DemoRestRentACar.Controllers
     public ActionResult<WeatherForecast> Get(int id)
     {
       //var weatherForecast = weatherForecasts.FirstOrDefault( w => w.Id == id);
-      var weatherForecast = _context.WeatherForecasts.Find( id);
+      var weatherForecast = _context.WeatherForecasts.Find(id);
       if (weatherForecast == null)
         return NotFound();
       else
         return Ok(weatherForecast);
     }
     [HttpPost]
-    public ActionResult Post(WeatherForecast weatherForecast)
+    public async Task<ActionResult> Post(WeatherForecast weatherForecast)
     {
       if (!ModelState.IsValid)
         return ValidationProblem(ModelState);
       _context.WeatherForecasts.Add(weatherForecast);
-      _context.SaveChangesAsync();
-      Debug.Assert( weatherForecast.Id != 0 );
+      await _context.SaveChangesAsync();
+      Debug.Assert(weatherForecast.Id != 0);
       return CreatedAtRoute(
-          new { controller = nameof(WeatherForecast), action=nameof(Post),
-              id = weatherForecast.Id
-              },
+          new
+          {
+            controller = nameof(WeatherForecast),
+            action = nameof(Post),
+            id = weatherForecast.Id
+          },
           weatherForecast
         );
+    }
+    [HttpPut("{id}")]
+    public ActionResult Put(int id , WeatherForecast weatherForecast)
+    {
+      if (!ModelState.IsValid)
+        return ValidationProblem(ModelState);
+      // reconnecte l'objet au contexte
+      _context.Entry(weatherForecast).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+      _context.SaveChanges();
+      return Ok(weatherForecast);
     }
   }
 }
